@@ -4,8 +4,8 @@ module Draper
   # bazillion methods.
   module LazyHelpers
     # Sends missing methods to the {HelperProxy}.
-    def method_missing(method, *args, &block)
-      helpers.send(method, *args, &block)
+    def method_missing(method, *args, **kwargs, &block)
+      helpers.send(method, *args, **kwargs, &block)
     rescue NoMethodError
       super
     end
