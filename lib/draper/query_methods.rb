@@ -3,10 +3,10 @@ require_relative 'query_methods/load_strategy'
 module Draper
   module QueryMethods
     # Proxies missing query methods to the source class if the strategy allows.
-    def method_missing(method, *args, **kwargs, &block)
+    ruby2_keywords def method_missing(method, *args, &block)
       return super unless strategy.allowed? method
 
-      object.send(method, *args, **kwargs, &block).decorate(with: decorator_class, context: context)
+      object.send(method, *args, &block).decorate(with: decorator_class, context: context)
     end
 
     def respond_to_missing?(method, include_private = false)
